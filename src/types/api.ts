@@ -206,3 +206,73 @@ export interface ResetPasswordPayload {
     username: string
     newPassword: string
 }
+
+// ===== 积分商城 =====
+export type RewardCategory = import('./db').RewardCategory
+
+export interface Reward {
+    id: number
+    familyId: number
+    name: string
+    description: string
+    category: RewardCategory
+    points: number
+    imageUrl: string
+    stock: number
+    dishId: number | null
+    dishName: string
+    isPublished: boolean
+    sortOrder: number
+    createdAt: string
+    updatedAt: string
+}
+
+export interface CreateRewardPayload {
+    familyId: number
+    name: string
+    description?: string
+    category: RewardCategory
+    points: number
+    imageUrl?: string
+    stock?: number
+    dishId?: number | null
+    isPublished?: boolean
+    sortOrder?: number
+}
+
+export interface UpdateRewardPayload {
+    name?: string
+    description?: string
+    category?: RewardCategory
+    points?: number
+    imageUrl?: string
+    stock?: number
+    dishId?: number | null
+    isPublished?: boolean
+    sortOrder?: number
+}
+
+export type RewardOrderStatus = import('./db').RewardOrderStatus
+
+export interface RewardOrder {
+    id: number
+    rewardId: number
+    rewardName: string
+    rewardImage: string
+    rewardPoints: number
+    category: RewardCategory
+    familyId: number
+    userId: number
+    userNickname: string
+    userAvatar: string
+    remark: string
+    status: RewardOrderStatus
+    receivedAt: string | null
+    receivedBy: number | null
+    createdAt: string
+}
+
+export interface RedeemRewardResult {
+    orderId: number
+    balance: number
+}

@@ -115,9 +115,10 @@ export type PointsRecordType =
     | 'dish_reward'
     | 'manual_add'
     | 'manual_subtract'
+    | 'reward_deduct'
 
 /** 关联类型 */
-export type PointsReferenceType = '' | 'order' | 'task' | 'dish'
+export type PointsReferenceType = '' | 'order' | 'task' | 'dish' | 'reward'
 
 export interface PointsRecordRow {
     id: number
@@ -164,4 +165,42 @@ export interface TaskAssigneeRow {
     completed_at: string | null
     created_at: string
     updated_at: string
+}
+
+/** 奖励分类 */
+export type RewardCategory = 'physical' | 'gift' | 'play' | 'dish'
+
+export interface RewardRow {
+    id: number
+    family_id: number
+    name: string
+    description: string
+    category: RewardCategory
+    points: number
+    image_url: string
+    stock: number
+    dish_id: number | null
+    is_published: number
+    sort_order: number
+    created_at: string
+    updated_at: string
+}
+
+/** 兑换记录状态 */
+export type RewardOrderStatus = 'pending' | 'received' | 'cancelled'
+
+export interface RewardOrderRow {
+    id: number
+    reward_id: number
+    reward_name: string
+    reward_image: string
+    reward_points: number
+    category: RewardCategory
+    family_id: number
+    user_id: number
+    remark: string
+    status: RewardOrderStatus
+    received_at: string | null
+    received_by: number | null
+    created_at: string
 }
